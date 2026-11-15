@@ -1,0 +1,15 @@
+CREATE TABLE owners (id INT PRIMARY KEY, name STRING, registered DATE, active BOOLEAN);
+CREATE TABLE cars (id INT PRIMARY KEY, brand STRING, price DOUBLE, available BOOLEAN, owner_id INT REFERENCES owners(id));
+INSERT INTO owners VALUES (1, 'Иван Петров', '2025-01-10', TRUE), (2, 'Анна Смирнова', '2025-02-15', TRUE);
+INSERT INTO cars VALUES (1, 'Toyota', 25000.0, TRUE, 1), (3, 'Kia', 18000.0, TRUE, 2);
+INSERT INTO cars (id, brand) VALUES (2, 'BMW');
+SELECT * FROM owners;
+SELECT * FROM cars;
+SELECT brand, price FROM cars WHERE price > 20000;
+CREATE INDEX idx_cars_price ON cars (price);
+CREATE INDEX idx_cars_brand ON cars (brand);
+SELECT brand, price FROM cars WHERE price > 20000;
+UPDATE cars SET price = 30000, owner_id = 2 WHERE id = 2;
+SELECT * FROM cars WHERE brand = 'BMW';
+DELETE FROM cars WHERE brand = 'Toyota';
+SELECT * FROM cars;
